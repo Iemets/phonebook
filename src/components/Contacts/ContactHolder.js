@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { ListItem, useColorModeValue } from '@chakra-ui/react';
 import { getCurrentContact } from '../../store/actionCreator';
-import NameTag from './NameTag';
+import Contact from './Contact';
 
-const GroupItem = ({ contact, contacts, currentContact, getContact, input }) => {
+const ContactHolder = ({ contact, contacts, currentContact, getContact, input }) => {
     const bgHover = useColorModeValue('gray.200', 'gray.700');
     const bgActive = useColorModeValue('gray.100', 'gray.600');
 
@@ -16,7 +16,7 @@ const GroupItem = ({ contact, contacts, currentContact, getContact, input }) => 
             _active={{bgColor: bgActive}}
             bgColor={currentContact.id === contact.id ? bgHover : 'none'}
         >
-            <NameTag contact={contact} input={input}/>
+            <Contact contact={contact} input={input}/>
         </ListItem>
     );
 }
@@ -33,4 +33,4 @@ const mapDispatchToProps = dispatch => {
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(GroupItem);
+export default connect(mapStateToProps, mapDispatchToProps)(ContactHolder);
