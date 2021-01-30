@@ -1,3 +1,6 @@
+import React from 'react';
+import Proptypes from 'prop-types';
+
 const markStyle = {
     backgroundColor: '#3182CE',
     color: '#FFFFFF'
@@ -33,3 +36,9 @@ export const highlighter = (str, query) => {
     }
     return combined;
 };
+
+
+MarkInput.propTypes = {
+    children: Proptypes.node
+};
+

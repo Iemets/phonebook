@@ -1,4 +1,5 @@
 import React from 'react';
+import Proptypes from 'prop-types';
 import { Text } from '@chakra-ui/react';
 import { highlighter } from './HighlightSearch';
 
@@ -15,6 +16,12 @@ const Contact = ({ contact, input }) => {
         </>
 
     );
-}
+};
+
+Contact.propTypes = {
+    contact: Proptypes.object,
+    input: Proptypes.string,
+};
+
 
 export default Contact;

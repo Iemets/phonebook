@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Flex, Spacer, Box, Heading, 
         IconButton, useColorModeValue,
-        Tooltip 
+        Tooltip, useDisclosure 
     } from '@chakra-ui/react';
 import { AddIcon } from '@chakra-ui/icons';
 import { MoonSunToggleIcon } from '../icons/icons';
+import AddContact from '../AddContact/AddContact';
 
 
 const Header = () => {
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const firstField = useRef();
     const bg = useColorModeValue('white', 'gray.900');
     return (
         <Flex 
@@ -19,7 +22,7 @@ const Header = () => {
             boxShadow="md"
         >
             <Box>
-                <Heading fontWeight="200">Olek's PhoneBook</Heading>
+                <Heading fontWeight="200">Olek&apos;s PhoneBook</Heading>
             </Box>
             <Spacer/>
             <Flex
@@ -27,8 +30,9 @@ const Header = () => {
                 justifyContent='space-evenly'
             >
                 <Tooltip label={'Add contact'}>
-                    <IconButton bgColor={bg} icon={<AddIcon/>}/>
+                    <IconButton bgColor={bg} icon={<AddIcon/>} onClick={onOpen}/>
                 </Tooltip>
+                <AddContact isOpen={isOpen} onClose={onClose} firstField={firstField}/>
                 <MoonSunToggleIcon/>
             </Flex>
       </Flex>

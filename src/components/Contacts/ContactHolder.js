@@ -1,4 +1,5 @@
 import React from 'react';
+import Proptypes from 'prop-types';
 import { connect } from 'react-redux';
 import { ListItem, useColorModeValue } from '@chakra-ui/react';
 import { getCurrentContact } from '../../store/actionCreator';
@@ -31,6 +32,14 @@ const mapDispatchToProps = dispatch => {
     return {
         getContact: (id, contacts) => dispatch(getCurrentContact(id, contacts))
     }
+};
+
+ContactHolder.propTypes = {
+    contact: Proptypes.object,
+    contacts: Proptypes.array,
+    currentContact: Proptypes.object,
+    getContact: Proptypes.func,
+    input: Proptypes.string
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactHolder);

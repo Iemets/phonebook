@@ -1,4 +1,5 @@
 import React from 'react';
+import Proptypes from 'prop-types';
 import { UnorderedList, ListItem, Badge, useColorModeValue } from '@chakra-ui/react';
 import ContactHolder from './ContactHolder';
 
@@ -22,6 +23,13 @@ const GroupOfContacts = ({ group, letterTag, contacts, input  }) => {
                 })}
         </UnorderedList>
     );
+};
+
+GroupOfContacts.propTypes = {
+    group: Proptypes.array,
+    letterTag: Proptypes.string,
+    contacts: Proptypes.array,
+    input: Proptypes.string
 };
 
 export default GroupOfContacts;

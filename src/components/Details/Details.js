@@ -1,4 +1,5 @@
 import React from 'react';
+import Proptypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Box, Text  } from '@chakra-ui/react';
 import DetailsElement from './DetailsElement';
@@ -44,12 +45,16 @@ const Details = ({ currentContact }) => {
             }
         </Media>
     );
-}
+};
 
 const mapStateToProps = state => {
     return {
         currentContact: state.contacts.currentContact
     }
-}
+};
+
+Details.propTypes = {
+    currentContact: Proptypes.object
+};
 
 export default connect(mapStateToProps)(Details);

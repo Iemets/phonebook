@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import Proptypes from 'prop-types';
 import { connect } from 'react-redux';
 import { useToast } from '@chakra-ui/react';
 // import LoginView from '../Login/LoginView'; 
@@ -30,6 +31,11 @@ const mapStateToProps = state => {
     return {
         msg: state.auth.messages
     }
+};
+
+
+App.propTypes = {
+    msg: Proptypes.object
 }
 
 export default connect(mapStateToProps)(App);

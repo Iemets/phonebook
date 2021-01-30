@@ -1,4 +1,5 @@
 import React from 'react';
+import Proptypes from 'prop-types';
 import { Box, Text, useColorModeValue } from '@chakra-ui/react';
 
 const DetailsElement = ({ boxprops, title, name }) => {
@@ -21,6 +22,12 @@ const DetailsElement = ({ boxprops, title, name }) => {
             <Text fontSize="20px" color="blue.500">{name}</Text>
         </Box>
     );
-}
+};
+
+DetailsElement.propTypes = {
+    boxprops: Proptypes.object, 
+    title: Proptypes.string, 
+    name: Proptypes.string
+};
 
 export default DetailsElement;
