@@ -1,32 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Field, useField } from 'formik';
+import { useField } from 'formik';
 import { FormControl, FormLabel, FormErrorMessage, Input } from '@chakra-ui/react';
 
 const FormInput = ({ label, ...props }) => {
-
     const [field, meta] = useField(props);
-
     return (
-        <Field name={label}>
-            {
-                props => {
-                    <FormControl>
-                        <FormLabel>{label}</FormLabel>
-                        <Input
-                            
-                        
-                        />
-                    </FormControl>
-                }
-            }
-        </Field>
+        <FormControl isInvalid={meta.error && meta.touched}>
+            <FormLabel>{label}</FormLabel>
+            <Input
+                {...props}
+                {...field}
+                fontSize="18px"
+                size="md"
+                variant="outline"
+                borderRadius={6}
+            />
+            <FormErrorMessage>{meta.error}</FormErrorMessage>
+        </FormControl>
     );
 };
 
 FormInput.propTypes = {
     label: PropTypes.string,
-    // props: PropTypes.object
+    props: PropTypes.object
 };
 
 

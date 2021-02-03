@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { Flex, Spacer, Box, Heading, 
         IconButton, useColorModeValue,
         Tooltip, useDisclosure 
@@ -10,7 +10,6 @@ import AddContact from '../AddContact/AddContact';
 
 const Header = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const firstField = useRef();
     const bg = useColorModeValue('white', 'gray.900');
     return (
         <Flex 
@@ -32,7 +31,7 @@ const Header = () => {
                 <Tooltip label={'Add contact'}>
                     <IconButton bgColor={bg} icon={<AddIcon/>} onClick={onOpen}/>
                 </Tooltip>
-                <AddContact isOpen={isOpen} onClose={onClose} firstField={firstField}/>
+                <AddContact isOpen={isOpen} onClose={onClose}/>
                 <MoonSunToggleIcon/>
             </Flex>
       </Flex>

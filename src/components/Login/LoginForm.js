@@ -9,6 +9,7 @@ import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup'; 
 import { connect } from 'react-redux';
 import { authState, signIn, logIn } from '../../store/actionCreator';
+import Proptypes from 'prop-types';
 
 
 const LoginForm = ({ uid, email, error, sign, auth, login }) => {
@@ -81,33 +82,32 @@ const LoginForm = ({ uid, email, error, sign, auth, login }) => {
                             </Field>
 
                             <Field name="password">
-                                { props => {
+                                { ({ field }) => {
                                     return (
                                         <FormControl isInvalid={formik.errors.password && formik.touched.password} isRequired>
                                             <FormLabel>Password</FormLabel>
                                             <InputGroup size="sm">
-                                                <InputRightElement
-                                                    children={
-                                                        <IconButton 
-                                                            bg="transparent"
-                                                            border="1px solid trans" 
-                                                            size="sm" 
-                                                            icon={
-                                                                <ViewIcon color="grey" 
-                                                                    _hover={{ color: "#3182CE" }}
-                                                                />}
-                                                            _hover={{ bg: "transparent" }}
-                                                            _active={{
-                                                                bg: "#dddfe2",
-                                                                transform: "scale(0.98)",
-                                                                borderColor: "#bec3c9",
-                                                            }}
-                                                            onClick={showPassHandler}
-                                                        />
-                                                    }
-                                                />
+                                                <InputRightElement>
+                                                    <IconButton 
+                                                        bg="transparent"
+                                                        border="1px solid trans" 
+                                                        size="sm" 
+                                                        icon={
+                                                            <ViewIcon color="grey" 
+                                                                _hover={{ color: "#3182CE" }}
+                                                            />}
+                                                        _hover={{ bg: "transparent" }}
+                                                        _active={{
+                                                            bg: "#dddfe2",
+                                                            transform: "scale(0.98)",
+                                                            borderColor: "#bec3c9",
+                                                        }}
+                                                        onClick={showPassHandler}  
+                                                    />
+                                                </InputRightElement>
+
                                                 <Input 
-                                                    {...props.field}
+                                                    {...field}
                                                     type={showPass ? "text" : "password"}
                                                     bg={bgInput}
                                                     borderRadius={6}
@@ -162,6 +162,15 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
+LoginForm.propTypes = {
+    field: Proptypes.object,
+    uid: Proptypes.string, 
+    email: Proptypes.string, 
+    error: Proptypes.object, 
+    sign: Proptypes.func, 
+    auth: Proptypes.func, 
+    login: Proptypes.func
+};
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginForm);

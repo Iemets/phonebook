@@ -1,20 +1,15 @@
 import React from 'react';
-import Proptypes from 'prop-types';
-import { Box, Stack, FormControl, FormLabel, FormErrorMessage,
-        Input, useColorModeValue } from '@chakra-ui/react';
-import { Formik, Form, Field } from 'formik';
+// import Proptypes from 'prop-types';
+import { Box, Stack, Button } from '@chakra-ui/react';
+import { Formik, Form } from 'formik';
 import * as Yup from 'yup'; 
+import FormInput from '../FormInput/FormInput';
+import TxtArea from '../TxtArea/TxtArea';
 
 
 const AddContactForm = () => {
-    const borderColor = useColorModeValue('gray.100', 'gray.600');
     return (
-        <Box    
-            w="70%" m="30px auto" p="20px"
-            border="1px solid"
-            borderColor={borderColor}
-            borderRadius={6}
-        >
+        <Box w="80%" m="30px auto" p="20px">
             <Formik
                 initialValues={{ firstName: '', lastName: '', phone: '', email: '', address: '', desc: '' }}
                 validationSchema={Yup.object({
@@ -29,74 +24,54 @@ const AddContactForm = () => {
                     resetForm();
                 }}
             >
-                {
-                    formik => (
-                        <Form>
-                            <Stack spacing={4}>
-                                <Field name="firstName" type="text">
-                                    {
-                                        props => (
-                                            <FormControl isInvalid={formik.errors.firstName && formik.touched.firstName}>
-                                                <FormLabel>First name</FormLabel>
-                                                <Input
-                                                    {...props.field}
-                                                    size="sm"
-                                                    variant="outline"
-                                                    borderRadius={6}
-                                                />
-                                                <FormErrorMessage>{formik.errors.firstName}</FormErrorMessage>
-                                            </FormControl>
-                                        )}
-                                </Field>
-
-                                <Field name="lastName" type="text">
-                                    {
-                                        props => (
-                                            <FormControl isInvalid={formik.errors.lastName && formik.touched.lastName}>
-                                                <FormLabel>Last name</FormLabel>
-                                                <Input
-                                                    {...props.field}
-                                                    size="sm"
-                                                    variant="outline"
-                                                    borderRadius={6}
-                                                />
-                                                <FormErrorMessage>{formik.errors.lastName}</FormErrorMessage>
-                                            </FormControl>
-                                        )
-                                    }
-                                </Field>
-
-
-
-
-                                <Field type="email" name="email" placeholder="Email">
-                                    {
-                                        props => (
-                                            <FormControl isInvalid={formik.errors.email && formik.touched.email}>
-                                                <FormLabel>Email</FormLabel>
-                                                <Input 
-                                                    {...props.field} 
-                                                    size="sm"
-                                                    variant="outline"
-                                                    // bg={bgInput}
-                                                    borderRadius={6}
-                                                />
-                                                        <FormErrorMessage>{formik.errors.email}</FormErrorMessage>
-                                            </FormControl>
-                                        )
-                                    }
-                                </Field>
-                            </Stack>
-                        </Form>
-                    )
-                }
+                <Form>
+                    <Stack spacing={4}>
+                        <FormInput
+                            placeholder="First name"
+                            name="firstName"
+                            type="text"
+                        />
+                        <FormInput
+                            placeholder="Last name"
+                            name="lastName"
+                            type="text"
+                        />
+                        <FormInput
+                            placeholder="Phone"
+                            name="phone"
+                            type="text"
+                        />
+                        <FormInput
+                            placeholder="Email"
+                            name="email"
+                            type="email"
+                        />
+                        <FormInput
+                            placeholder="Address"
+                            name="address"
+                            type="text"
+                        />
+                        <TxtArea
+                            placeholder="Description"
+                            name="desc"
+                            type="text"
+                        />
+                        <Button
+                            h="32px"
+                            colorScheme="blue"
+                            type="submit"
+                        >
+                            Add
+                        </Button>
+                    </Stack>
+                </Form>
             </Formik>
         </Box>
     );
 };
 
-AddContactForm.propTypes = {
-    field: Proptypes.object
-};
+// AddContactForm.propTypes = {
+//     firstField: Proptypes.object
+// };
 
 export default AddContactForm;

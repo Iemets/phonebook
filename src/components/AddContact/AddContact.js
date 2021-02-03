@@ -4,15 +4,14 @@ import { Drawer, DrawerOverlay, DrawerContent,
         DrawerCloseButton, DrawerHeader } from '@chakra-ui/react';
 import AddContactForm from './AddContactForm';
 
-const AddContact = ({ isOpen, onClose, firstField }) => {
+const AddContact = ({ isOpen, onClose }) => {
 
     return (
         <Drawer
             isOpen={isOpen}
             placement="right"
-            initialFocusRef={firstField}
             onClose={onClose}
-            size="md"
+            size="sm"
         >
             <DrawerOverlay>
                 <DrawerContent>
@@ -33,8 +32,7 @@ const AddContact = ({ isOpen, onClose, firstField }) => {
 
 AddContact.propTypes = {
     isOpen: Proptypes.bool, 
-    onClose: Proptypes.func, 
-    firstField: Proptypes.object
+    onClose: Proptypes.func
 };
 
 export default AddContact;
