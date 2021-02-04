@@ -13,8 +13,6 @@ const FormInput = ({ label, ...props }) => {
                 {...field}
                 fontSize="18px"
                 size="md"
-                variant="outline"
-                borderRadius={6}
             />
             <FormErrorMessage>{meta.error}</FormErrorMessage>
         </FormControl>

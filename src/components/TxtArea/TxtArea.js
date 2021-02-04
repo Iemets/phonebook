@@ -14,7 +14,7 @@ const TxtArea = ({label, ...props }) => {
                 fontSize="18px"
                 isInvalid={meta.error && meta.touched}
                 {...props}
-                {...field}           
+                {...field}        
             />
         </>
     );

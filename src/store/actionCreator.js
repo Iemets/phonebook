@@ -1,11 +1,20 @@
 import * as Types from './actionTypes';
-import { auth } from '../db/db';
+import { auth, db } from '../db/db';
 
 const errorHandler = message => {
     return {
         type: Types.ERROR,
         payload: {
             error: message
+        }
+    }
+};
+
+const successHandler = message => {
+    return {
+        type: Types.SUCCESS,
+        payload: {
+            success: message
         }
     }
 };
@@ -31,11 +40,22 @@ export const signIn = ({ email, password }) => {
         try {
             const createUser = auth.createUserWithEmailAndPassword(email, password);
             const user = await createUser;
+            const usr = user.user;
+            db.ref('users/' + usr.uid).set({
+                userProfile: {
+                    email: usr.email,
+                    password,
+                    creationTime: usr.metadata.creationTime
+                }}, error => error ? 
+                    dispatch(errorHandler(`No luck! userProfile wasn't created!`)) :
+                    dispatch(successHandler('userProfile created successfully!'))
+                
+                );
             return dispatch({
                 type: Types.SIGN_IN,
                 payload: {
-                    user,
-                    success: `Hello! Welcome to the Olek's phonebook!`
+                    user: usr,
+                    success: `Hello ${user.email}! Welcome to the Olek's phonebook!`
                 }
             });
         } catch(error) {
@@ -80,12 +100,14 @@ export const signOut = () => {
 
 
 
-export const getAllContacts = () => {
+export const getAllContacts = (uid) => {
     return async dispatch => {
         try{
              // const getContacts = await fetch('https://jsonplaceholder.typicode.com/users');
-            const getContacts = await fetch('https://yalantis-react-school-api.yalantis.com/api/task0/users');
-            const contacts = await getContacts.json(); 
+            // const getContacts = await fetch('https://yalantis-react-school-api.yalantis.com/api/task0/users');
+            // const contacts = await getContacts.json();
+            const getContacts = await db.ref('users/' + uid + '/contacts').once('value');
+            const contacts = await getContacts.val();
             return dispatch({
                 type: Types.GET_ALL_CONTACTS,
                 payload: {
@@ -93,7 +115,7 @@ export const getAllContacts = () => {
                 }
             });
         } catch {
-            return dispatch(errorHandler('no contacts!'))
+            return dispatch(errorHandler('smthng went wrong! no contacts!'))
         }
     
     }
@@ -111,5 +133,3 @@ export const getCurrentContact = (id, contacts) => {
         }
     }
 };
-
-

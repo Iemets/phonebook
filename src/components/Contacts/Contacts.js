@@ -1,24 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Proptypes from 'prop-types';
 import { Box, useColorModeValue } from "@chakra-ui/react";
-import { connect } from 'react-redux';
-import { getAllContacts } from '../../store/actionCreator';
 import Search from '../Search/Search';
 import GroupOfContacts from './GroupOfContacts';
 
 const alphabet = [...Array(26)].map((_, y) => String.fromCharCode(y + 65));
 
-const Contacts = ({ contacts, getContacts }) => {
+const Contacts = ({ contacts }) => {
     const [input, setInput] = useState('');
     const bg = useColorModeValue('white', 'gray.800');
     const borderColor = useColorModeValue('gray.300', 'gray.600');
-    
-    contacts = contacts.filter(c => c.lastName.toLowerCase().includes(input.toLowerCase()) || 
-    c.firstName.toLowerCase().includes(input.toLowerCase()));
 
-    useEffect(() => {
-        getContacts();
-    }, [getContacts]);
+    contacts = contacts.filter(c => c.lastName.toLowerCase().includes(input.toLowerCase()) || 
+        c.firstName.toLowerCase().includes(input.toLowerCase()));
 
     return (
         <Box w={['100%', '100%', '100%', '47%']}>
@@ -46,28 +40,19 @@ const Contacts = ({ contacts, getContacts }) => {
                                 group={group}
                                 letterTag={l}
                                 contacts={contacts}
-                                input={input}/>);})
+                                input={input}
+                            />
+                        );
+                    })   
                 }
             </Box>
         </Box>
     );
-}
-
-const mapStateToProps = state => {
-    return {
-        contacts: state.contacts.allContacts,
-    }
 };
 
-const mapDispatchToProps = dispatch => {
-    return {
-        getContacts: () => dispatch(getAllContacts()),
-    }
-};
 
 Contacts.propTypes = {
-    contacts: Proptypes.array,
-    getContacts: Proptypes.func
+    contacts: Proptypes.array
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Contacts);
+export default Contacts;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { 
             Box, FormControl, FormLabel, FormErrorMessage, 
             InputGroup, InputRightElement, Input, Button,
@@ -8,11 +8,11 @@ import { ViewIcon } from '@chakra-ui/icons';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup'; 
 import { connect } from 'react-redux';
-import { authState, signIn, logIn } from '../../store/actionCreator';
+import { signIn, logIn } from '../../store/actionCreator';
 import Proptypes from 'prop-types';
 
 
-const LoginForm = ({ uid, email, error, sign, auth, login }) => {
+const LoginForm = ({ sign, login }) => {
     const [showPass, setShow] = useState(false);
     const showPassHandler = () => setShow(!showPass);
 
@@ -21,12 +21,6 @@ const LoginForm = ({ uid, email, error, sign, auth, login }) => {
     const bgInput = useColorModeValue('white', 'gray.800')
 
     const [signMethod, setSignMethod] = useState(false);
-
-    useEffect(() => {
-        auth();
-    }, [auth]);
-
-    console.log(email, uid, error);
 
     return (
         <Box 
@@ -156,7 +150,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        auth: () => dispatch(authState()),
         sign: (values) => dispatch(signIn(values)),
         login: (values) => dispatch(logIn(values))
     }
@@ -166,7 +159,7 @@ LoginForm.propTypes = {
     field: Proptypes.object,
     uid: Proptypes.string, 
     email: Proptypes.string, 
-    error: Proptypes.object, 
+    error: Proptypes.string, 
     sign: Proptypes.func, 
     auth: Proptypes.func, 
     login: Proptypes.func

@@ -1,14 +1,15 @@
 import React, { useEffect } from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
 import Proptypes from 'prop-types';
 import { connect } from 'react-redux';
 import { useToast } from '@chakra-ui/react';
-// import LoginView from '../Login/LoginView'; 
+import { authState } from '../../store/actionCreator';
+import LoginView from '../Login/LoginView'; 
 import { error, success } from '../EventMessages/Messages';
-
 import PhoneBook from '../PhoneBook/PhoneBook';
-import Header from '../Header/Header';
 
-function App({ msg }) {
+
+function App({ msg, user, auth }) {
     const toast = useToast();
     useEffect(() => {
         if(msg.success){
@@ -17,25 +18,37 @@ function App({ msg }) {
             toast(error(msg.error))
         }
     }, [msg, toast]);
+
+    useEffect(() => {
+        auth();
+    }, [auth]);
+
   return (
-    <>
-        <Header/>
-        <PhoneBook/>
-        {/* <LoginView/> */}
-    </>
+    <Router>
+        {user.uid ? <PhoneBook/> : <LoginView/>}
+    </Router>
   );
 }
 
 
 const mapStateToProps = state => {
     return {
-        msg: state.auth.messages
+        msg: state.auth.messages,
+        user: state.auth.user
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        auth: () => dispatch(authState())
     }
 };
 
 
 App.propTypes = {
-    msg: Proptypes.object
-}
+    msg: Proptypes.object,
+    auth: Proptypes.func,
+    user: Proptypes.object
+};
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

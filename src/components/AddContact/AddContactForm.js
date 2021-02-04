@@ -1,5 +1,4 @@
 import React from 'react';
-// import Proptypes from 'prop-types';
 import { Box, Stack, Button } from '@chakra-ui/react';
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup'; 
@@ -9,7 +8,7 @@ import TxtArea from '../TxtArea/TxtArea';
 
 const AddContactForm = () => {
     return (
-        <Box w="80%" m="30px auto" p="20px">
+        <Box w="90%" m="30px auto" p="20px">
             <Formik
                 initialValues={{ firstName: '', lastName: '', phone: '', email: '', address: '', desc: '' }}
                 validationSchema={Yup.object({
@@ -30,31 +29,37 @@ const AddContactForm = () => {
                             placeholder="First name"
                             name="firstName"
                             type="text"
+                            variant="flushed"
                         />
                         <FormInput
                             placeholder="Last name"
                             name="lastName"
                             type="text"
+                            variant="flushed"
                         />
                         <FormInput
                             placeholder="Phone"
                             name="phone"
                             type="text"
+                            variant="flushed"
                         />
                         <FormInput
                             placeholder="Email"
                             name="email"
                             type="email"
+                            variant="flushed"
                         />
                         <FormInput
                             placeholder="Address"
                             name="address"
                             type="text"
+                            variant="flushed"
                         />
                         <TxtArea
                             placeholder="Description"
                             name="desc"
                             type="text"
+                            variant="filled"
                         />
                         <Button
                             h="32px"
@@ -69,9 +74,5 @@ const AddContactForm = () => {
         </Box>
     );
 };
-
-// AddContactForm.propTypes = {
-//     firstField: Proptypes.object
-// };
 
 export default AddContactForm;

@@ -17,7 +17,7 @@ const AddContact = ({ isOpen, onClose }) => {
                 <DrawerContent>
                     <DrawerCloseButton />
 
-                    <DrawerHeader borderBottomWidth="1px">
+                    <DrawerHeader fontWeight="200" fontSize="4xl">
                         Add contact
                     </DrawerHeader>
 

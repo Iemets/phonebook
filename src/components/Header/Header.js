@@ -1,7 +1,7 @@
 import React from 'react';
 import { Flex, Spacer, Box, Heading, 
         IconButton, useColorModeValue,
-        Tooltip, useDisclosure 
+        Tooltip, useDisclosure
     } from '@chakra-ui/react';
 import { AddIcon } from '@chakra-ui/icons';
 import { MoonSunToggleIcon } from '../icons/icons';
@@ -36,6 +36,7 @@ const Header = () => {
             </Flex>
       </Flex>
     );
-}
+};
+
 
 export default Header;
