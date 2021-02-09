@@ -7,10 +7,11 @@ import Media from 'react-media';
 import Header from '../Header/Header';
 import Contacts from '../Contacts/Contacts';
 import Details from '../Details/Details';
-import NoContacts from '../NoContacts/NoContacts';
+// import NoContacts from '../NoContacts/NoContacts';
 
 
 const PhoneBook = ({ uid, contacts, currentContact, getContacts }) => {
+
     const bg = useColorModeValue('gray.100', 'gray.800');
 
     const mediaQueries = {
@@ -34,7 +35,7 @@ const PhoneBook = ({ uid, contacts, currentContact, getContacts }) => {
                 bgColor={bg}
                 minH="800px"
             >
-                {contacts ? <Contacts contacts={contacts}/> : <NoContacts/>}
+                {contacts ? <Contacts contacts={contacts}/> : null}
                 <Spacer/>
                 <Media queries={mediaQueries}>
                     {matches => (

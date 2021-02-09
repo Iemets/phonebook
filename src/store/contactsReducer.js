@@ -1,7 +1,7 @@
 import * as Types from './actionTypes';
 
 const init = {
-    allContacts: [],
+    allContacts: null,
     currentContact: {},
     searchInput: ''
 };

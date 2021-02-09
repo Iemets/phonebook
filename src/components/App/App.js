@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom';
 import Proptypes from 'prop-types';
 import { connect } from 'react-redux';
 import { useToast } from '@chakra-ui/react';
 import { authState } from '../../store/actionCreator';
-import LoginView from '../Login/LoginView'; 
 import { error, success } from '../EventMessages/Messages';
+import LoginView from '../Login/LoginView'; 
 import PhoneBook from '../PhoneBook/PhoneBook';
+// import Loader from '../Loader/Loader';
 
 
 function App({ msg, user, auth }) {
@@ -25,7 +26,13 @@ function App({ msg, user, auth }) {
 
   return (
     <Router>
-        {user.uid ? <PhoneBook/> : <LoginView/>}
+        {/* <Loader/> */}
+        {user.uid ? <Redirect to="phonebook"/> : <Redirect to="login"/>}
+
+        <Switch>
+            <Route path="/phonebook"><PhoneBook/></Route>
+            <Route path="/login"><LoginView/></Route>
+        </Switch>
     </Router>
   );
 }
